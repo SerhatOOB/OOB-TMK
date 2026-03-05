@@ -922,27 +922,27 @@ textarea.inp{min-height:70px;resize:vertical}
     <div>
       <div class="fiche mb16">
         <div class="fiche-hd">📋 Fiche de Passation TMK → CA</div>
-        <label class="flbl">Société + Secteur d'activité</label><input class="inp pu-focus" placeholder="Ex : Dupont SARL — BTP Normandie">
-        <label class="flbl">Décideur — Nom, Prénom, Fonction</label><input class="inp pu-focus" placeholder="Jean Martin — Gérant depuis 8 ans">
-        <label class="flbl">Tél direct + Email</label><input class="inp pu-focus" placeholder="06 XX XX XX XX · martin@dupont.fr">
-        <label class="flbl">Adresse exacte du R1TMK</label><input class="inp pu-focus" placeholder="12 rue des Artisans, 76000 Rouen — entrée côté parking">
-        <label class="flbl">Date &amp; Heure du R1TMK</label><input class="inp pu-focus" placeholder="Mardi 20 mai à 10h00">
+        <label class="flbl">Société + Secteur d'activité</label><input class="inp pu-focus" id="f_societe" placeholder="Ex : Dupont SARL — BTP Normandie">
+        <label class="flbl">Décideur — Nom, Prénom, Fonction</label><input class="inp pu-focus" id="f_decideur" placeholder="Jean Martin — Gérant depuis 8 ans">
+        <label class="flbl">Tél direct + Email</label><input class="inp pu-focus" id="f_contact" placeholder="06 XX XX XX XX · martin@dupont.fr">
+        <label class="flbl">Adresse exacte du R1TMK</label><input class="inp pu-focus" id="f_adresse" placeholder="12 rue des Artisans, 76000 Rouen — entrée côté parking">
+        <label class="flbl">Date &amp; Heure du R1TMK</label><input class="inp pu-focus" id="f_date" placeholder="Mardi 20 mai à 10h00">
         <label class="flbl">Scénario d'entrée utilisé</label>
-        <select class="inp pu-focus">
+        <select id="f_scenario" class="inp pu-focus">
           <option value="">Sélectionner le scénario...</option>
           <option>🟠 Client Orange — Upsell</option>
           <option>🔵 Conquête concurrent</option>
           <option>🟢 Entrée cybersécurité</option>
           <option>🟤 Migration cuivre → IP</option>
         </select>
-        <label class="flbl">Opérateur actuel + Nb de lignes</label><input class="inp pu-focus" placeholder="SFR · 6 mobiles pro + Fibre + Standard RNIS">
-        <label class="flbl">Fin de contrat estimée</label><input class="inp pu-focus" placeholder="Décembre 2025 / Ne sait pas">
+        <label class="flbl">Opérateur actuel + Nb de lignes</label><input class="inp pu-focus" id="f_operateur" placeholder="SFR · 6 mobiles pro + Fibre + Standard RNIS">
+        <label class="flbl">Fin de contrat estimée</label><input class="inp pu-focus" id="f_echeance" placeholder="Décembre 2025 / Ne sait pas">
         <label class="flbl">Douleurs exprimées — mots exacts du prospect</label>
-        <textarea class="inp pu-focus" rows="3" placeholder="Ex : 'On a des coupures internet le matin, c'est catastrophique' / 'La facture a augmenté de 30% sans explication'"></textarea>
+        <textarea class="inp pu-focus" rows="3" id="f_douleurs" placeholder="Ex : 'On a des coupures internet le matin, c'est catastrophique' / 'La facture a augmenté de 30% sans explication'"></textarea>
         <label class="flbl">Équipements spécifiques signalés (alarme, TPE, interphone…)</label>
-        <textarea class="inp pu-focus" rows="2" placeholder="TPE Ingenico sur ligne fixe · Alarme Securitas sur RTC · Sans objet"></textarea>
+        <textarea class="inp pu-focus" rows="2" id="f_equipements" placeholder="TPE Ingenico sur ligne fixe · Alarme Securitas sur RTC · Sans objet"></textarea>
         <label class="flbl">Niveau d'ouverture / Ton pendant l'appel</label>
-        <select class="inp pu-focus">
+        <select id="f_ton" class="inp pu-focus">
           <option value="">Évaluer le ton du prospect...</option>
           <option>🔥 Très ouvert — a posé des questions, enthousiaste</option>
           <option>✅ Ouvert — a accepté facilement, ton positif</option>
@@ -950,9 +950,10 @@ textarea.inp{min-height:70px;resize:vertical}
           <option>⚠️ Hésitant — a accepté après insistance, à confirmer</option>
         </select>
         <label class="flbl">Infos complémentaires pour le CA</label>
-        <textarea class="inp pu-focus" rows="2" placeholder="Tout ce qui peut aider le CA : contexte, références, situation particulière..."></textarea>
+        <textarea class="inp pu-focus" rows="2" id="f_infos" placeholder="Tout ce qui peut aider le CA : contexte, références, situation particulière..."></textarea>
         <div class="flex-r mt12">
-          <button class="btn btn-pu w100" style="font-size:13px">📤 Fiche envoyée au CA ✓</button>
+          <button id="btnCopie" class="btn btn-pu w100" style="font-size:13px" onclick="copierFiche()">📋 Éléments copiés pour remplir le R1TMK</button>
+          <div id="copieConfirm" style="display:none;margin-top:8px;background:var(--gr10);border:1.5px solid var(--grb);border-radius:var(--rs);padding:10px 12px;font-size:12.5px;color:var(--gr);font-weight:600;text-align:center">✅ Copié dans le presse-papier — collez directement dans le compte rendu R1TMK</div>
         </div>
       </div>
     </div>
@@ -1206,6 +1207,81 @@ function resetC() {
   ['cntA','cntR','cntB','cntX','cntRP'].forEach(id => document.getElementById(id).textContent = '0');
   document.getElementById('ratioD').textContent = 'Ratio R1TMK/Appel : —';
 }
+
+function copierFiche() {
+  const v = id => {
+    const el = document.getElementById(id);
+    if (!el) return '';
+    return (el.value || '').trim();
+  };
+  const societe    = v('f_societe');
+  const decideur   = v('f_decideur');
+  const contact    = v('f_contact');
+  const adresse    = v('f_adresse');
+  const date       = v('f_date');
+  const scenario   = v('f_scenario');
+  const operateur  = v('f_operateur');
+  const echeance   = v('f_echeance');
+  const douleurs   = v('f_douleurs');
+  const equip      = v('f_equipements');
+  const ton        = v('f_ton');
+  const infos      = v('f_infos');
+
+  const now = new Date();
+  const ts = now.toLocaleDateString('fr-FR') + ' à ' + now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
+
+  let lines = [];
+  lines.push('=== R1TMK OOB — Fiche Passation TMK ===');
+  lines.push('Transmis le : ' + ts);
+  lines.push('');
+  if (societe)   lines.push('SOCIÉTÉ        : ' + societe);
+  if (decideur)  lines.push('DÉCIDEUR       : ' + decideur);
+  if (contact)   lines.push('CONTACT        : ' + contact);
+  if (adresse)   lines.push('ADRESSE R1TMK  : ' + adresse);
+  if (date)      lines.push('DATE / HEURE   : ' + date);
+  if (scenario)  lines.push('SCÉNARIO       : ' + scenario);
+  lines.push('');
+  if (operateur) lines.push('OPÉRATEUR      : ' + operateur);
+  if (echeance)  lines.push('FIN CONTRAT    : ' + echeance);
+  lines.push('');
+  if (douleurs)  lines.push('DOULEURS EXPRIMÉES :\n' + douleurs);
+  if (equip)     lines.push('ÉQUIPEMENTS    : ' + equip);
+  if (ton)       lines.push('TON / OUVERTURE: ' + ton);
+  if (infos)     lines.push('INFOS COMPLÉMENTAIRES :\n' + infos);
+  lines.push('');
+  lines.push('--- Transmis par le Pôle TMK OOB ---');
+
+  const txt = lines.join('\n');
+
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.getElementById('btnCopie');
+    const conf = document.getElementById('copieConfirm');
+    btn.style.background = 'var(--gr)';
+    btn.style.borderColor = 'var(--gr)';
+    btn.style.color = '#fff';
+    btn.textContent = '✅ Copié !';
+    conf.style.display = 'block';
+    setTimeout(() => {
+      btn.style.background = '';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+      btn.textContent = '📋 Éléments copiés pour remplir le R1TMK';
+    }, 3000);
+  }).catch(() => {
+    // Fallback pour anciens navigateurs
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    const conf = document.getElementById('copieConfirm');
+    conf.style.display = 'block';
+  });
+}
+
 </script>
 </body>
 </html>
