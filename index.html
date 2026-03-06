@@ -315,12 +315,107 @@ textarea.inp{min-height:70px;resize:vertical}
 .rb.rr {background:var(--re10);border-color:var(--reb);color:var(--re)} .rb.rr:hover,.rb.rr.sel {background:var(--re);color:#fff;border-color:var(--re)}
 .rb.rp {background:var(--pu10);border-color:var(--pub);color:var(--pu)} .rb.rp:hover,.rb.rp.sel {background:var(--pu);color:#fff;border-color:var(--pu)}
 
+/*── EMAIL TEMPLATE ──*/
+.email-tpl {
+  background:var(--bl10); border:1.5px solid var(--blb);
+  border-radius:var(--rs); padding:16px; font-size:13.5px; line-height:1.9; color:var(--tx);
+}
+.email-tpl strong { color:var(--bl); font-weight:600; }
+
 /*── UTILITY ──*/
 .mb8{margin-bottom:8px} .mb12{margin-bottom:12px} .mb16{margin-bottom:16px}
 .mb20{margin-bottom:20px} .mb24{margin-bottom:24px}
 .mt8{margin-top:8px} .mt12{margin-top:12px} .mt16{margin-top:16px}
 .flex-r{display:flex;gap:8px;flex-wrap:wrap}
 .w100{width:100%}
+
+/*══ SESSION MODULE — Cold Call Ergonomics ═══════════*/
+/* Call flow guided */
+.cf-wrap { padding:6px 0 4px; }
+.cf-crumb { display:flex; align-items:center; gap:4px; margin-bottom:14px; flex-wrap:wrap; }
+.cf-crumb-step { display:flex; align-items:center; gap:5px; font-size:11px; font-weight:600; color:var(--tx3); padding:4px 8px; border-radius:20px; transition:all .18s; }
+.cf-crumb-step.active { color:var(--or); background:var(--or10); }
+.cf-crumb-step.done   { color:var(--gr); }
+.cf-crumb-step .cf-dot { width:7px; height:7px; border-radius:50%; background:var(--bd2); flex-shrink:0; transition:background .18s; }
+.cf-crumb-step.active .cf-dot { background:var(--or); }
+.cf-crumb-step.done   .cf-dot { background:var(--gr); }
+.cf-crumb-arrow { font-size:14px; color:var(--bd2); padding:0 2px; flex-shrink:0; }
+.cf-panel { display:none; flex-direction:column; align-items:center; gap:10px; animation: cfIn .22s ease; }
+.cf-panel.visible { display:flex; }
+@keyframes cfIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+.cf-label { font-size:13px; font-weight:700; color:var(--tx2); text-align:center; margin-bottom:2px; }
+.cf-btn-launch {
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  background:var(--or);border:none;border-radius:var(--r);padding:18px 28px;cursor:pointer;
+  width:100%;transition:transform .15s,box-shadow .15s;box-shadow:0 4px 18px rgba(255,98,0,.28);
+}
+.cf-btn-launch:hover  { transform:translateY(-2px); box-shadow: 0 8px 28px rgba(255,98,0,.38); }
+.cf-btn-launch:active { transform:scale(.97); }
+.cf-btn-launch .cf-icon { font-size:32px; line-height:1; }
+.cf-btn-launch .cf-main-lbl { font-family:'Bricolage Grotesque',sans-serif; font-size:16px; font-weight:800; color:#fff; letter-spacing:.3px; }
+.cf-btn-launch .cf-sub-lbl  { font-size:10.5px; color:rgba(255,255,255,.65); font-weight:500; }
+.cf-row2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; width:100%; }
+.cf-row3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; width:100%; }
+.cf-btn {
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  border-radius:var(--rs);padding:12px 8px;cursor:pointer;
+  transition:transform .14s,box-shadow .14s;
+}
+.cf-btn:hover  { transform:translateY(-2px); box-shadow:var(--e2); }
+.cf-btn:active { transform:scale(.95); }
+.cf-btn .cf-b-icon { font-size:22px; line-height:1; }
+.cf-btn .cf-b-lbl  { font-size:10.5px; font-weight:700; text-align:center; line-height:1.3; }
+.cf-btn-bl { background:var(--bl10); border:2px solid var(--blb); color:var(--bl); }
+.cf-btn-gy { background:var(--sur2); border:2px solid var(--bd);  color:var(--tx2); }
+.cf-btn-rd { background:var(--re10); border:2px solid var(--reb); color:var(--re); }
+.cf-btn-gr { background:var(--gr10); border:2px solid var(--grb); color:var(--gr); box-shadow:0 0 0 3px rgba(21,122,66,.08); }
+.cf-btn-am { background:var(--am10); border:2px solid var(--amb); color:var(--am); }
+.cf-flash {
+  font-size:12px; font-weight:700; padding:7px 16px; border-radius:var(--rs);
+  opacity:0; transform:translateY(-6px); transition:opacity .2s,transform .2s; pointer-events:none;
+  text-align:center; width:100%;
+}
+.cf-flash.show { opacity:1; transform:none; }
+.cf-flash.fl-miss { background:var(--sur2); color:var(--tx2); border:1.5px solid var(--bd2); }
+.cf-flash.fl-bar  { background:var(--sur2); color:var(--tx2); border:1.5px solid var(--bd2); }
+.cf-flash.fl-ref  { background:var(--re10); color:var(--re);  border:1.5px solid var(--reb); }
+.cf-flash.fl-r1tmk{ background:var(--gr10); color:var(--gr);  border:1.5px solid var(--grb); }
+.cf-flash.fl-rep  { background:var(--am10); color:var(--am);  border:1.5px solid var(--amb); }
+.cf-footer { display:flex; align-items:center; justify-content:flex-end; width:100%; padding-top:6px; border-top:1px solid var(--bd); }
+.cf-reset-btn { background:none; border:none; cursor:pointer; font-size:11px; color:var(--tx4); font-family:inherit; padding:4px 6px; border-radius:6px; transition:color .15s, background .15s; }
+.cf-reset-btn:hover { color:var(--re); background:var(--re10); }
+/* Arborescence */
+.arbo-wrap { display:flex; flex-direction:column; align-items:center; padding:10px 4px 4px; overflow-x:auto; }
+.arbo-level { display:flex; align-items:flex-start; justify-content:center; width:100%; gap:0; }
+.arbo-branch { display:flex; flex-direction:column; align-items:center; flex:1; }
+.arbo-h-line-r { height:2px; background:var(--bd2); align-self:flex-end; width:50%; }
+.arbo-h-line-l { height:2px; background:var(--bd2); align-self:flex-start; width:50%; }
+.arbo-h-line-full { height:2px; background:var(--bd2); width:100%; }
+.arbo-v-line { width:2px; background:var(--bd2); }
+.arbo-node {
+  border:1.5px solid var(--bd); border-radius:var(--rs); padding:7px 10px;
+  text-align:center; min-width:60px; background:var(--sur); transition:transform .15s,box-shadow .15s; cursor:default;
+}
+.arbo-node:hover { transform:translateY(-1px); box-shadow:var(--e2); }
+.arbo-root { border-color:var(--or40); background:var(--or05); }
+.arbo-dec  { border-color:var(--blb);  background:var(--bl10); }
+.arbo-r1tmk{ border-color:var(--grb);  background:var(--gr10); }
+.arbo-ref  { border-color:var(--reb);  background:var(--re10); }
+.arbo-rep  { border-color:var(--amb);  background:var(--am10); }
+.arbo-miss,.arbo-bar { border-color:var(--bd2); background:var(--sur2); }
+.arbo-nn { font-family:'Bricolage Grotesque',sans-serif; font-size:20px; font-weight:800; line-height:1.1; }
+.arbo-nn.lg { font-size:26px; }
+.arbo-nn.gn { color:var(--gr); } .arbo-nn.rd { color:var(--re); }
+.arbo-nn.bl { color:var(--bl); } .arbo-nn.or { color:var(--or); }
+.arbo-nn.am { color:var(--am); }
+.arbo-nn.gy { color:var(--tx3); }
+.arbo-pct { font-size:10.5px; font-weight:700; color:var(--tx3); margin-bottom:1px; line-height:1; }
+.arbo-lbl { font-size:9.5px; color:var(--tx3); margin-top:2px; font-weight:600; white-space:nowrap; letter-spacing:.2px; }
+.arbo-pie-wrap { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; padding-top:12px; border-top:1.5px solid var(--bd); }
+.arbo-pie-box { text-align:center; }
+.arbo-pie-title { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:var(--tx3); margin-bottom:7px; }
+.arbo-pie-legend { display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin-top:6px; font-size:10px; }
+.arbo-leg-dot { width:8px; height:8px; border-radius:50%; display:inline-block; flex-shrink:0; }
 
 /*── FOOTER ──*/
 .pg-ft{margin-top:44px;padding:20px 0 0;border-top:1.5px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
@@ -920,40 +1015,21 @@ textarea.inp{min-height:70px;resize:vertical}
   <div class="bn pu mb20"><span class="bni">🤝</span><div><strong>Principe de base :</strong> Le CA ne doit jamais avoir à redécouvrir des infos de base en arrivant au R1. Tout ce que vous avez obtenu au téléphone doit être dans la fiche. Ses propres mots du prospect — notez-les mot pour mot. Ils sont l'or du CA.</div></div>
   <div class="g2">
     <div>
-      <div class="fiche mb16">
-        <div class="fiche-hd">📋 Fiche de Passation TMK → CA</div>
-        <label class="flbl">Société + Secteur d'activité</label><input class="inp pu-focus" id="f_societe" placeholder="Ex : Dupont SARL — BTP Normandie">
-        <label class="flbl">Décideur — Nom, Prénom, Fonction</label><input class="inp pu-focus" id="f_decideur" placeholder="Jean Martin — Gérant depuis 8 ans">
-        <label class="flbl">Tél direct + Email</label><input class="inp pu-focus" id="f_contact" placeholder="06 XX XX XX XX · martin@dupont.fr">
-        <label class="flbl">Adresse exacte du R1TMK</label><input class="inp pu-focus" id="f_adresse" placeholder="12 rue des Artisans, 76000 Rouen — entrée côté parking">
-        <label class="flbl">Date &amp; Heure du R1TMK</label><input class="inp pu-focus" id="f_date" placeholder="Mardi 20 mai à 10h00">
-        <label class="flbl">Scénario d'entrée utilisé</label>
-        <select id="f_scenario" class="inp pu-focus">
-          <option value="">Sélectionner le scénario...</option>
-          <option>🟠 Client Orange — Upsell</option>
-          <option>🔵 Conquête concurrent</option>
-          <option>🟢 Entrée cybersécurité</option>
-          <option>🟤 Migration cuivre → IP</option>
-        </select>
-        <label class="flbl">Opérateur actuel + Nb de lignes</label><input class="inp pu-focus" id="f_operateur" placeholder="SFR · 6 mobiles pro + Fibre + Standard RNIS">
-        <label class="flbl">Fin de contrat estimée</label><input class="inp pu-focus" id="f_echeance" placeholder="Décembre 2025 / Ne sait pas">
-        <label class="flbl">Douleurs exprimées — mots exacts du prospect</label>
-        <textarea class="inp pu-focus" rows="3" id="f_douleurs" placeholder="Ex : 'On a des coupures internet le matin, c'est catastrophique' / 'La facture a augmenté de 30% sans explication'"></textarea>
-        <label class="flbl">Équipements spécifiques signalés (alarme, TPE, interphone…)</label>
-        <textarea class="inp pu-focus" rows="2" id="f_equipements" placeholder="TPE Ingenico sur ligne fixe · Alarme Securitas sur RTC · Sans objet"></textarea>
-        <label class="flbl">Niveau d'ouverture / Ton pendant l'appel</label>
-        <select id="f_ton" class="inp pu-focus">
-          <option value="">Évaluer le ton du prospect...</option>
-          <option>🔥 Très ouvert — a posé des questions, enthousiaste</option>
-          <option>✅ Ouvert — a accepté facilement, ton positif</option>
-          <option>😐 Neutre — a accepté mais sans enthousiasme</option>
-          <option>⚠️ Hésitant — a accepté après insistance, à confirmer</option>
-        </select>
-        <label class="flbl">Infos complémentaires pour le CA</label>
-        <textarea class="inp pu-focus" rows="2" id="f_infos" placeholder="Tout ce qui peut aider le CA : contexte, références, situation particulière..."></textarea>
-        <div class="flex-r mt12">
-          <button id="btnCopie" class="btn btn-pu w100" style="font-size:13px" onclick="copierFiche()">📋 Éléments copiés pour remplir le R1TMK</button>
-          <div id="copieConfirm" style="display:none;margin-top:8px;background:var(--gr10);border:1.5px solid var(--grb);border-radius:var(--rs);padding:10px 12px;font-size:12.5px;color:var(--gr);font-weight:600;text-align:center">✅ Copié dans le presse-papier — collez directement dans le compte rendu R1TMK</div>
+      <div class="bn pu mb16" style="align-items:flex-start">
+        <span class="bni">📋</span>
+        <div>
+          <strong>La fiche de passation est maintenant dans l'onglet Session (touche 9).</strong><br>
+          <span style="font-size:13px;color:var(--tx2)">Remplissez-la en temps réel pendant vos appels — elle est accessible directement depuis le tracker de session. Une fois complète, copiez-la en un clic pour l'envoyer au CA.</span>
+        </div>
+      </div>
+      <div class="card mb16">
+        <div class="card-hd">🎯 Les 5 informations critiques pour le CA</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div class="rule"><div class="rn" style="background:var(--pu);color:#fff;min-width:28px;text-align:center;padding:0 6px">1</div><div class="rt"><strong>Décideur confirmé</strong> — prénom, nom, fonction. Pas un assistant ou un responsable sans pouvoir de décision.</div></div>
+          <div class="rule"><div class="rn" style="background:var(--pu);color:#fff;min-width:28px;text-align:center;padding:0 6px">2</div><div class="rt"><strong>Volume de lignes</strong> — mobile + fixe + internet. Minimum 3 lignes pour justifier la visite du CA.</div></div>
+          <div class="rule"><div class="rn" style="background:var(--pu);color:#fff;min-width:28px;text-align:center;padding:0 6px">3</div><div class="rt"><strong>Date / heure / adresse exacte</strong> — avec précision (bâtiment, étage, code, parking). Pas d'approximatif.</div></div>
+          <div class="rule"><div class="rn" style="background:var(--pu);color:#fff;min-width:28px;text-align:center;padding:0 6px">4</div><div class="rt"><strong>Mots exacts du prospect</strong> — ses propres formulations sur ses douleurs. L'or du CA pour le closing.</div></div>
+          <div class="rule"><div class="rn" style="background:var(--pu);color:#fff;min-width:28px;text-align:center;padding:0 6px">5</div><div class="rt"><strong>Fin de contrat</strong> — même approximative. &lt;12 mois = priorité haute. Indiquer l'opérateur actuel.</div></div>
         </div>
       </div>
     </div>
@@ -1023,74 +1099,314 @@ textarea.inp{min-height:70px;resize:vertical}
 <!-- ████ SESSION ████ -->
 <div class="page" id="page-session">
   <div class="ph">
-    <div class="ph-tag">Module 08 — Suivi de session en temps réel</div>
-    <h1 class="ph-h1">Session <em>&amp; Stats TMK</em></h1>
-    <p class="ph-sub">Suivez vos indicateurs en temps réel. Notez le résultat de chaque appel immédiatement.</p>
+    <div class="ph-tag">Module 08 — Session & Fiche Passation</div>
+    <h1 class="ph-h1">Session <em>&amp; Fiche R1TMK</em></h1>
+    <p class="ph-sub">Remplissez la fiche pendant et après chaque appel concluant. Trackez chaque appel en temps réel avec le call flow guidé.</p>
   </div>
-  <div class="g2">
+
+
+  <!-- ════ TWO-COLUMN LAYOUT ════ -->
+  <div class="g2 mb16">
+
+    <!-- ── LEFT: FICHE DE PASSATION R1TMK ── -->
     <div>
-      <div class="card mb16">
-        <div class="card-hd">⚡ Compteurs de Session</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
-          <div class="ctr"><div class="ctr-n" id="cntA">0</div><div class="ctr-l">Appels</div></div>
-          <div class="ctr"><div class="ctr-n gn" id="cntR">0</div><div class="ctr-l">R1TMK pris</div></div>
-          <div class="ctr"><div class="ctr-n sm" id="cntB">0</div><div class="ctr-l">Barrages</div></div>
-          <div class="ctr"><div class="ctr-n rd" id="cntX">0</div><div class="ctr-l">Refus</div></div>
-          <div class="ctr"><div class="ctr-n" style="font-size:28px;color:var(--am)" id="cntRP">0</div><div class="ctr-l">Reports planifiés</div></div>
-        </div>
-        <div id="ratioD" style="background:var(--sur2);border:1.5px solid var(--bd);border-radius:var(--rs);padding:10px;text-align:center;font-size:13px;color:var(--tx3);margin-bottom:12px">Ratio R1TMK/Appel : —</div>
-        <div class="flex-r mb8">
-          <button class="btn btn-or" style="flex:1" onclick="addC('cntA')">+ Appel</button>
-          <button class="btn btn-ok" style="flex:1" onclick="addC('cntR')">+ R1TMK ✅</button>
-        </div>
-        <div class="flex-r">
-          <button class="btn btn-gh" style="flex:1" onclick="addC('cntB')">+ Barrage</button>
-          <button class="btn btn-gh" style="flex:1" onclick="addC('cntX')">+ Refus</button>
-          <button class="btn btn-gh" style="flex:1" onclick="addC('cntRP')">+ Report</button>
-          <button class="btn btn-gh" style="flex:1" onclick="resetC()">↺ Reset</button>
+      <div class="fiche">
+        <div class="fiche-hd">📋 Fiche de Passation TMK → CA</div>
+        <label class="flbl">Société + Secteur d'activité</label><input class="inp pu-focus" id="f_societe" placeholder="Ex : Dupont SARL — BTP Normandie">
+        <label class="flbl">Décideur — Nom, Prénom, Fonction</label><input class="inp pu-focus" id="f_decideur" placeholder="Jean Martin — Gérant depuis 8 ans">
+        <label class="flbl">Tél direct + Email</label><input class="inp pu-focus" id="f_contact" placeholder="06 XX XX XX XX · martin@dupont.fr">
+        <label class="flbl">Adresse exacte du R1TMK</label><input class="inp pu-focus" id="f_adresse" placeholder="12 rue des Artisans, 76000 Rouen — entrée côté parking">
+        <label class="flbl">Date &amp; Heure du R1TMK</label><input class="inp pu-focus" id="f_date" placeholder="Mardi 20 mai à 10h00">
+        <label class="flbl">Scénario d'entrée utilisé</label>
+        <select id="f_scenario" class="inp pu-focus">
+          <option value="">Sélectionner le scénario...</option>
+          <option>🟠 Client Orange — Upsell</option>
+          <option>🔵 Conquête concurrent</option>
+          <option>🟢 Entrée cybersécurité</option>
+          <option>🟤 Migration cuivre → IP</option>
+        </select>
+        <label class="flbl">Opérateur actuel + Nb de lignes</label><input class="inp pu-focus" id="f_operateur" placeholder="SFR · 6 mobiles pro + Fibre + Standard RNIS">
+        <label class="flbl">Fin de contrat estimée</label><input class="inp pu-focus" id="f_echeance" placeholder="Décembre 2025 / Ne sait pas">
+        <label class="flbl">Douleurs exprimées — mots exacts du prospect</label>
+        <textarea class="inp pu-focus" rows="3" id="f_douleurs" placeholder="Ex : 'On a des coupures internet le matin, c'est catastrophique' / 'La facture a augmenté de 30% sans explication'"></textarea>
+        <label class="flbl">Équipements spécifiques signalés (alarme, TPE, interphone…)</label>
+        <textarea class="inp pu-focus" rows="2" id="f_equipements" placeholder="TPE Ingenico sur ligne fixe · Alarme Securitas sur RTC · Sans objet"></textarea>
+        <label class="flbl">Niveau d'ouverture / Ton pendant l'appel</label>
+        <select id="f_ton" class="inp pu-focus">
+          <option value="">Évaluer le ton du prospect...</option>
+          <option>🔥 Très ouvert — a posé des questions, enthousiaste</option>
+          <option>✅ Ouvert — a accepté facilement, ton positif</option>
+          <option>😐 Neutre — a accepté mais sans enthousiasme</option>
+          <option>⚠️ Hésitant — a accepté après insistance, à confirmer</option>
+        </select>
+        <label class="flbl">Infos complémentaires pour le CA</label>
+        <textarea class="inp pu-focus" rows="2" id="f_infos" placeholder="Tout ce qui peut aider le CA : contexte, références, situation particulière..."></textarea>
+        <div class="flex-r mt12">
+          <button id="btnCopie" class="btn btn-pu w100" style="font-size:13px" onclick="copierFiche()">📋 Copier la fiche pour le CRM / email CA</button>
+          <div id="copieConfirm" style="display:none;margin-top:8px;background:var(--gr10);border:1.5px solid var(--grb);border-radius:var(--rs);padding:10px 12px;font-size:12.5px;color:var(--gr);font-weight:600;text-align:center">✅ Copié dans le presse-papier — collez directement dans le compte rendu R1TMK</div>
         </div>
       </div>
-      <div class="card mb16">
-        <div class="card-hd">🚦 Résultat du dernier appel</div>
-        <div class="res-g">
-          <button class="rb rg" onclick="setRes(this,'✅ R1TMK CONFIRMÉ')">✅ R1TMK Confirmé</button>
-          <button class="rb rp" onclick="setRes(this,'📅 REPORTÉ / RAPPEL')">📅 Reporté / Rappel</button>
-          <button class="rb rr" onclick="setRes(this,'❌ REFUS DÉFINITIF')">❌ Refus Définitif</button>
-          <button class="rb ry" onclick="setRes(this,'🔒 BARRAGE / PAS DÉCIDEUR')">🔒 Barrage</button>
-        </div>
-        <div id="resDisp" style="text-align:center;padding:9px;border-radius:7px;background:var(--sur2);color:var(--tx3);font-size:13px">Aucun résultat sélectionné</div>
-      </div>
+
+      <!-- ── EMAIL DE CONFIRMATION ── -->
       <div class="card">
-        <div class="card-hd">📝 Notes d'appel rapides</div>
-        <textarea class="inp" rows="5" placeholder="Notes rapides sur le dernier appel :&#10;• Prospect, ton, infos collectées&#10;• Objection principale rencontrée&#10;• Date de rappel si report&#10;• Point à signaler au responsable TMK"></textarea>
+        <div class="card-hd">📧 Email de Confirmation R1TMK</div>
+        <div class="email-tpl">
+          <strong>Objet : Confirmation RDV — Audit Télécom OOB × [Nom Société]</strong><br><br>
+          Bonjour [Prénom],<br><br>
+          Suite à notre échange, je vous confirme la venue de notre expert le <strong>[date] à [heure]</strong> dans vos locaux.<br><br>
+          Il viendra analyser votre situation télécoms actuelle et vous présenter des pistes d'optimisation personnalisées pour votre entreprise avec des solutions Orange.<br><br>
+          Merci de vous munir de vos <strong>factures télécoms mensuelles actuelles</strong> et de vos engagements restants. Ce qui lui permettra d'être immédiatement opérationnel et d'avancer rapidement sur les sujets afin de vous faire gagner du temps.<br><br>
+          À très bientôt,<br>
+          <strong>[Prénom Nom] — TMK OOB</strong><br>
+          OOB — Distributeur Expert Certifié Orange<br>
+          Normandie &amp; Île-de-France<br>
+          [Mobile direct] · [Email]
+        </div>
+        <div class="bn info mt12"><span class="bni">📱</span><div><strong>SMS J-1 à 17h :</strong> "Bonjour [Prénom], je vous confirme la venue de notre expert demain à [heure] pour votre audit télécom. À demain ! [Prénom] — OOB"</div></div>
       </div>
     </div>
+
+    <!-- ── RIGHT: STATS + FLOW + ARBORESCENCE ── -->
     <div>
+
+      <!-- Stats card -->
       <div class="card mb16">
-        <div class="card-hd">📊 Objectifs de Session</div>
-        <table class="tbl">
-          <thead><tr><th>Indicateur</th><th>Démarrage</th><th>Objectif</th></tr></thead>
-          <tbody>
-            <tr><td>R1TMK / Appels</td><td class="tw">1 / 10-12</td><td class="tf">1 / 4-6</td></tr>
-            <tr><td>Taux décrochage</td><td class="tw">20-25%</td><td class="tf">&gt;35%</td></tr>
-            <tr><td>Taux show R1TMK</td><td class="tw">&gt;65%</td><td class="tf">&gt;80%</td></tr>
-            <tr><td>Taux R1TMK → signature CA</td><td class="tok">~30%</td><td class="tf">&gt;50%</td></tr>
-          </tbody>
-        </table>
+        <div class="card-hd">⚡ Statistiques de Session</div>
+        <!-- Row 1: primary counters -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+          <div class="ctr"><div class="ctr-n" id="cntA">0</div><div class="ctr-l">Appels tentés</div></div>
+          <div class="ctr"><div class="ctr-n" style="color:var(--bl);font-size:28px" id="cntD">0</div><div class="ctr-l">Décroché</div></div>
+          <div class="ctr"><div class="ctr-n gn" id="cntR">0</div><div class="ctr-l">R1TMK obtenus</div></div>
+        </div>
+        <!-- Row 2: secondary counters -->
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+          <div class="ctr"><div class="ctr-n sm" id="cntN">0</div><div class="ctr-l">Sans réponse</div></div>
+          <div class="ctr"><div class="ctr-n sm" id="cntB">0</div><div class="ctr-l">Barrages</div></div>
+          <div class="ctr"><div class="ctr-n rd" id="cntX">0</div><div class="ctr-l">Refus</div></div>
+          <div class="ctr"><div class="ctr-n sm" style="color:var(--am)" id="cntRP">0</div><div class="ctr-l">Reports</div></div>
+        </div>
+        <!-- Ratio panels -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
+          <div id="ratioDecroch" style="background:var(--bl10);border:1.5px solid var(--blb);border-radius:var(--rs);padding:8px;text-align:center;font-size:12px;color:var(--bl)">Taux décrochage : —</div>
+          <div id="ratioD" style="background:var(--gr10);border:1.5px solid var(--grb);border-radius:var(--rs);padding:8px;text-align:center;font-size:12px;color:var(--gr)">Taux R1TMK : —</div>
+        </div>
+        <!-- ══ CALL FLOW GUIDÉ ══ -->
+        <div class="cf-wrap">
+          <!-- Breadcrumb -->
+          <div class="cf-crumb">
+            <div class="cf-crumb-step active" id="cfS0"><span class="cf-dot"></span>Appel</div>
+            <div class="cf-crumb-arrow">›</div>
+            <div class="cf-crumb-step" id="cfS1"><span class="cf-dot"></span>Décroché ?</div>
+            <div class="cf-crumb-arrow">›</div>
+            <div class="cf-crumb-step" id="cfS2"><span class="cf-dot"></span>Issue</div>
+          </div>
+          <!-- Flash -->
+          <div class="cf-flash" id="cfFlash"></div>
+          <!-- ÉTAPE 0 : Lancer un appel -->
+          <div class="cf-panel visible" id="cfPanel0">
+            <button class="cf-btn-launch" onclick="cfLancer()">
+              <span class="cf-icon">📞</span>
+              <span class="cf-main-lbl">Nouvel appel</span>
+              <span class="cf-sub-lbl">Cliquez pour enregistrer un appel tenté</span>
+            </button>
+          </div>
+          <!-- ÉTAPE 1 : Décroché ? -->
+          <div class="cf-panel" id="cfPanel1">
+            <div class="cf-label">L'appel a-t-il décroché ?</div>
+            <div class="cf-row2">
+              <button class="cf-btn cf-btn-bl" onclick="cfDecro()">
+                <span class="cf-b-icon">☎️</span>
+                <span class="cf-b-lbl">Décroché</span>
+              </button>
+              <button class="cf-btn cf-btn-gy" onclick="cfSansRep()">
+                <span class="cf-b-icon">📵</span>
+                <span class="cf-b-lbl">Sans réponse</span>
+              </button>
+            </div>
+            <button class="cf-reset-btn" style="align-self:flex-end;font-size:10px;margin-top:-4px" onclick="cfAnnuler()">✕ Annuler cet appel</button>
+          </div>
+          <!-- ÉTAPE 2 : Issue -->
+          <div class="cf-panel" id="cfPanel2">
+            <div class="cf-label">Issue de la conversation</div>
+            <div class="cf-row2" style="margin-bottom:8px">
+              <button class="cf-btn cf-btn-gy" onclick="cfIssue('cntB','🔒 Barrage noté','fl-bar')">
+                <span class="cf-b-icon">🔒</span>
+                <span class="cf-b-lbl">Barrage</span>
+              </button>
+              <button class="cf-btn cf-btn-rd" onclick="cfIssue('cntX','❌ Refus enregistré','fl-ref')">
+                <span class="cf-b-icon">❌</span>
+                <span class="cf-b-lbl">Refus</span>
+              </button>
+            </div>
+            <div class="cf-row2">
+              <button class="cf-btn cf-btn-am" onclick="cfIssue('cntRP','📅 Report planifié','fl-rep')">
+                <span class="cf-b-icon">📅</span>
+                <span class="cf-b-lbl">Report</span>
+              </button>
+              <button class="cf-btn cf-btn-gr" onclick="cfIssue('cntR','🎉 R1TMK obtenu !','fl-r1tmk')">
+                <span class="cf-b-icon">✅</span>
+                <span class="cf-b-lbl">R1TMK<br>obtenu</span>
+              </button>
+            </div>
+            <button class="cf-reset-btn" style="align-self:flex-end;font-size:10px;margin-top:-4px" onclick="cfAnnulerDecro()">✕ Annuler le décroché</button>
+          </div>
+          <!-- Footer reset -->
+          <div class="cf-footer">
+            <button class="cf-reset-btn" onclick="resetC()">↺ Reset session complète</button>
+          </div>
+        </div>
       </div>
+
+      <!-- ════ ARBORESCENCE ════ -->
       <div class="card mb16">
+        <div class="card-hd">🌿 Arborescence des Appels — Session</div>
+    <div class="arbo-wrap">
+      <!-- Root -->
+      <div class="arbo-node arbo-root" style="margin-bottom:0">
+        <div class="arbo-nn or lg" id="arboNA">0</div>
+        <div class="arbo-lbl">📞 Appels tentés</div>
+      </div>
+      <div class="arbo-v-line" style="height:14px"></div>
+      <div class="arbo-level">
+        <!-- Left: Sans réponse -->
+        <div class="arbo-branch">
+          <div class="arbo-h-line-r"></div>
+          <div class="arbo-v-line" style="height:14px"></div>
+          <div class="arbo-node arbo-miss">
+            <div class="arbo-pct" id="arboNEp">—</div>
+            <div class="arbo-nn gy" id="arboNN">0</div>
+            <div class="arbo-lbl">📵 Sans réponse</div>
+          </div>
+        </div>
+        <!-- Right: Décroché -->
+        <div class="arbo-branch">
+          <div class="arbo-h-line-l"></div>
+          <div class="arbo-v-line" style="height:14px"></div>
+          <div class="arbo-node arbo-dec">
+            <div class="arbo-pct" id="arboNDp">—</div>
+            <div class="arbo-nn bl" id="arboNDv">0</div>
+            <div class="arbo-lbl">☎️ Décroché</div>
+          </div>
+          <div class="arbo-v-line" style="height:14px"></div>
+          <!-- Level 2: Barrage / Refus / Report / R1TMK -->
+          <div class="arbo-level" style="width:100%">
+            <div class="arbo-branch">
+              <div class="arbo-h-line-r"></div>
+              <div class="arbo-v-line" style="height:12px"></div>
+              <div class="arbo-node arbo-bar">
+                <div class="arbo-pct" id="arboBp">—</div>
+                <div class="arbo-nn gy" id="arboB">0</div>
+                <div class="arbo-lbl">🔒 Barrage</div>
+              </div>
+            </div>
+            <div class="arbo-branch">
+              <div class="arbo-h-line-full"></div>
+              <div class="arbo-v-line" style="height:12px"></div>
+              <div class="arbo-node arbo-ref">
+                <div class="arbo-pct" id="arboXp">—</div>
+                <div class="arbo-nn rd" id="arboX">0</div>
+                <div class="arbo-lbl">❌ Refus</div>
+              </div>
+            </div>
+            <div class="arbo-branch">
+              <div class="arbo-h-line-full"></div>
+              <div class="arbo-v-line" style="height:12px"></div>
+              <div class="arbo-node arbo-rep">
+                <div class="arbo-pct" id="arboRPp">—</div>
+                <div class="arbo-nn am" id="arboRP">0</div>
+                <div class="arbo-lbl">📅 Report</div>
+              </div>
+            </div>
+            <div class="arbo-branch">
+              <div class="arbo-h-line-l"></div>
+              <div class="arbo-v-line" style="height:12px"></div>
+              <div class="arbo-node arbo-r1tmk">
+                <div class="arbo-pct" id="arboRp">—</div>
+                <div class="arbo-nn gn" id="arboR">0</div>
+                <div class="arbo-lbl">✅ R1TMK</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pie charts -->
+    <div class="arbo-pie-wrap">
+      <!-- Pie 1: Décroché vs Sans réponse -->
+      <div class="arbo-pie-box">
+        <div class="arbo-pie-title">Tentatives</div>
+        <svg viewBox="0 0 120 120" width="110" height="110" style="display:block;margin:0 auto;overflow:visible">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bd)" stroke-width="20"/>
+          <circle id="p1miss" cx="60" cy="60" r="46" fill="none" stroke="#94A3B8" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <circle id="p1dec" cx="60" cy="60" r="46" fill="none" stroke="#1848A0" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <text x="60" y="57" text-anchor="middle" font-family="'Bricolage Grotesque',sans-serif" font-size="16" font-weight="800" fill="var(--bl)"><tspan x="60" id="pie1pct">—</tspan></text>
+          <text x="60" y="70" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--tx3)">décroché</text>
+        </svg>
+        <div class="arbo-pie-legend">
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#1848A0"></span>Décroché</span>
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#94A3B8"></span>Sans rép.</span>
+        </div>
+      </div>
+      <!-- Pie 2: R1TMK / Refus / Report / Barrage sur décrochés -->
+      <div class="arbo-pie-box">
+        <div class="arbo-pie-title">Décrochés</div>
+        <svg viewBox="0 0 120 120" width="110" height="110" style="display:block;margin:0 auto;overflow:visible">
+          <circle cx="60" cy="60" r="46" fill="none" stroke="var(--bd)" stroke-width="20"/>
+          <circle id="p2bar" cx="60" cy="60" r="46" fill="none" stroke="#94A3B8" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <circle id="p2rep" cx="60" cy="60" r="46" fill="none" stroke="#D97706" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <circle id="p2ref" cx="60" cy="60" r="46" fill="none" stroke="#C42018" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <circle id="p2r1tmk" cx="60" cy="60" r="46" fill="none" stroke="#157A42" stroke-width="20"
+            stroke-dasharray="0 289.3" stroke-dashoffset="72.3"
+            transform="rotate(-90 60 60)" style="transition:stroke-dasharray .7s cubic-bezier(.4,0,.2,1)"/>
+          <text x="60" y="57" text-anchor="middle" font-family="'Bricolage Grotesque',sans-serif" font-size="16" font-weight="800" fill="var(--gr)"><tspan x="60" id="pie2pct">—</tspan></text>
+          <text x="60" y="70" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="8" fill="var(--tx3)">R1TMK</text>
+        </svg>
+        <div class="arbo-pie-legend">
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#157A42"></span>R1TMK</span>
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#C42018"></span>Refus</span>
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#D97706"></span>Report</span>
+          <span style="display:flex;align-items:center;gap:4px"><span class="arbo-leg-dot" style="background:#94A3B8"></span>Barrage</span>
+        </div>
+      </div>
+    </div>
+  </div><!-- /arborescence card -->
+
+      <!-- ── CHECKLIST AVANT RACCROCHER ── -->
+      <div class="card mb16">
+        <div class="card-hd">✅ Checklist — Avant de Raccrocher</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Nom + prénom + fonction du décideur notés</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Opérateur actuel + nombre de lignes notés</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Fin de contrat estimée notée</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Douleurs exprimées — mots exacts du prospect notés</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Date / heure / adresse exacte du R1TMK confirmés</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Email de confirmation envoyé dans les 5 minutes</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> SMS J-1 à 17h planifié dans l'agenda</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> Fiche de passation complète transmise au CA</label>
+          <label style="display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer"><input type="checkbox" style="accent-color:var(--or);width:15px;height:15px"> CRM + agenda mis à jour immédiatement</label>
+        </div>
+      </div>
+
+      <!-- ── BOUCLE AMÉLIORATION TMK/CA ── -->
+      <div class="card">
         <div class="card-hd">🔁 Boucle d'amélioration TMK/CA</div>
-        <div class="sb g"><div class="sb-tag">Après chaque R1TMK — Questions au CA</div><div class="sb-txt">1. « Est-ce que le R1TMK était suffisamment renseigné ? »<br>2. « Y avait-il des infos manquantes que tu aurais aimé avoir ? »<br>3. « Le prospect était-il dans l'état d'esprit que tu attendais ? »</div></div>
+        <div class="sb g"><div class="sb-tag">Après chaque R1TMK — Questions au CA</div><div class="sb-txt">1. « Est-ce que la fiche de passation était suffisamment renseignée ? »<br>2. « Y avait-il des infos manquantes que tu aurais aimé avoir ? »<br>3. « Le prospect était-il dans l'état d'esprit que tu attendais ? »</div></div>
         <div class="sb pu"><div class="sb-tag">Les 3 raisons d'un no-show à analyser</div><div class="sb-txt"><strong>Mauvais créneau :</strong> jour ou heure inadapté à l'activité du prospect.<br><strong>Manque d'engagement :</strong> R1TMK pris sous pression, pas de confirmation email.<br><strong>Décideur absent :</strong> non-décideur a accepté sans en informer le dirigeant.</div></div>
         <div class="sb am"><div class="sb-tag">Rappel systématique J-1 à 17h — Obligatoire</div><div class="sb-txt">SMS ou appel de confirmation la veille. Réduit les no-shows de 60%. Si impossible à joindre → envoyer le SMS et noter dans la fiche CA.</div></div>
       </div>
-      <div class="card">
-        <div class="card-hd">🎯 Profil du R1TMK Idéal pour le CA</div>
-        <div class="bn ok"><span class="bni">🔥</span><div><strong>Le R1TMK parfait :</strong> Décideur · 5+ lignes · concurrent SFR/Bouygues/Free · fin contrat &lt;12 mois · douleur exprimée en ses propres mots · ton enthousiaste · fiche passation complète avec ses formulations exactes.</div></div>
-        <div class="bn tip"><span class="bni">💡</span><div><strong>Le détail qui fait la différence :</strong> Notez les mots exacts du prospect dans la fiche. "On perd la connexion tous les matins" est infiniment plus utile pour le CA que "problème de fibre". C'est son argument de closing.</div></div>
-      </div>
-    </div>
-  </div>
+
+    </div><!-- /right column -->
+  </div><!-- /g2 -->
 
   <div class="pg-ft">
     <div class="ft-l">
@@ -1186,26 +1502,172 @@ function updateScore() {
     v.textContent = '🔥 R1TMK Premium — lead très chaud, priorité absolue pour le CA !';
   }
 }
-function setRes(btn, label) {
-  document.querySelectorAll('.rb').forEach(b => b.classList.remove('sel'));
-  btn.classList.add('sel');
-  const d = document.getElementById('resDisp');
-  d.textContent = label; d.style.fontWeight = '700'; d.style.color = 'var(--tx)';
+// ══ CALL FLOW GUIDÉ ══════════════════════════════════
+let _cfStep = 0;
+
+function cfGoto(step) {
+  [0,1,2].forEach(i => {
+    const p = document.getElementById('cfPanel'+i);
+    const s = document.getElementById('cfS'+i);
+    if (!p || !s) return;
+    p.classList.toggle('visible', i === step);
+    s.classList.remove('active','done');
+    if (i === step) s.classList.add('active');
+    else if (i < step) s.classList.add('done');
+  });
+  _cfStep = step;
 }
-function addC(id) {
+
+function cfFlash(msg, cls) {
+  const el = document.getElementById('cfFlash');
+  if (!el) return;
+  el.className = 'cf-flash ' + cls;
+  el.textContent = msg;
+  void el.offsetWidth;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.classList.remove('show'); }, 2200);
+}
+
+function cfLancer() {
+  _inc('cntA');
+  cfGoto(1);
+}
+
+function cfDecro() {
+  _inc('cntD');
+  cfGoto(2);
+}
+
+function cfSansRep() {
+  _inc('cntN');
+  cfFlash('📵 Sans réponse enregistré', 'fl-miss');
+  cfGoto(0);
+}
+
+function cfIssue(id, msg, cls) {
+  _inc(id);
+  cfFlash(msg, cls);
+  cfGoto(0);
+}
+
+function cfAnnuler() {
+  const el = document.getElementById('cntA');
+  if (el) { const v = parseInt(el.textContent)||0; el.textContent = Math.max(0, v-1); }
+  updateRatios(); updateArbo();
+  cfGoto(0);
+}
+
+function cfAnnulerDecro() {
+  const el = document.getElementById('cntD');
+  if (el) { const v = parseInt(el.textContent)||0; el.textContent = Math.max(0, v-1); }
+  updateRatios(); updateArbo();
+  cfGoto(1);
+}
+
+function _inc(id) {
   const el = document.getElementById(id);
-  el.textContent = parseInt(el.textContent) + 1;
-  const a = parseInt(document.getElementById('cntA').textContent);
-  const r = parseInt(document.getElementById('cntR').textContent);
-  const d = document.getElementById('ratioD');
-  if (!a) { d.textContent = 'Ratio R1TMK/Appel : —'; return; }
-  const pct = Math.round(r / a * 100);
-  const em = pct >= 25 ? '🔥' : pct >= 15 ? '✅' : '📈';
-  d.innerHTML = 'Ratio R1TMK/Appel : <strong style="color:var(--or)">' + r + '/' + a + ' (' + pct + '%)</strong> ' + em;
+  if (el) el.textContent = (parseInt(el.textContent)||0) + 1;
+  updateRatios(); updateArbo();
 }
+
+function updateRatios() {
+  const g = id => { const e = document.getElementById(id); return e ? parseInt(e.textContent)||0 : 0; };
+  const a = g('cntA'), d = g('cntD'), r = g('cntR');
+  const rD = document.getElementById('ratioD');
+  const rDec = document.getElementById('ratioDecroch');
+  if (!a) {
+    if (rD) rD.textContent = 'Taux R1TMK : —';
+    if (rDec) rDec.textContent = 'Taux décrochage : —';
+    return;
+  }
+  const pctDec = Math.round(d / a * 100);
+  if (rDec) {
+    const emD = pctDec >= 35 ? '🔥' : pctDec >= 20 ? '✅' : '📈';
+    rDec.innerHTML = 'Décrochage : <strong>' + d + '/' + a + ' (' + pctDec + '%)</strong> ' + emD;
+  }
+  const base = d > 0 ? d : a;
+  const pctR1TMK = Math.round(r / base * 100);
+  if (rD) {
+    const em = pctR1TMK >= 25 ? '🔥' : pctR1TMK >= 15 ? '✅' : '📈';
+    rD.innerHTML = 'R1TMK/Décroché : <strong>' + r + '/' + base + ' (' + pctR1TMK + '%)</strong> ' + em;
+  }
+}
+
 function resetC() {
-  ['cntA','cntR','cntB','cntX','cntRP'].forEach(id => document.getElementById(id).textContent = '0');
-  document.getElementById('ratioD').textContent = 'Ratio R1TMK/Appel : —';
+  ['cntA','cntD','cntR','cntN','cntB','cntX','cntRP'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.textContent = '0';
+  });
+  const rD = document.getElementById('ratioD');
+  const rDec = document.getElementById('ratioDecroch');
+  if (rD) rD.textContent = 'Taux R1TMK : —';
+  if (rDec) rDec.textContent = 'Taux décrochage : —';
+  cfGoto(0);
+  updateArbo();
+}
+
+function updateArbo() {
+  const g = id => { const e = document.getElementById(id); return e ? parseInt(e.textContent)||0 : 0; };
+  const a = g('cntA'), d = g('cntD'), r = g('cntR'), n = g('cntN'), b = g('cntB'), x = g('cntX'), rp = g('cntRP');
+  const set = (id, val) => { const e = document.getElementById(id); if(e) e.textContent = val; };
+
+  set('arboNA',  a);
+  set('arboNN',  n);
+  set('arboNDv', d);
+  set('arboB',   b);
+  set('arboX',   x);
+  set('arboRP',  rp);
+  set('arboR',   r);
+
+  const pN  = a ? Math.round(n/a*100) : null;
+  const pD  = a ? Math.round(d/a*100) : null;
+  const pB  = d ? Math.round(b/d*100) : null;
+  const pX  = d ? Math.round(x/d*100) : null;
+  const pRP = d ? Math.round(rp/d*100) : null;
+  const pR  = d ? Math.round(r/d*100) : null;
+  set('arboNEp',  pN  !== null ? pN+'%'  : '—');
+  set('arboNDp',  pD  !== null ? pD+'%'  : '—');
+  set('arboBp',   pB  !== null ? pB+'%'  : '—');
+  set('arboXp',   pX  !== null ? pX+'%'  : '—');
+  set('arboRPp',  pRP !== null ? pRP+'%' : '—');
+  set('arboRp',   pR  !== null ? pR+'%'  : '—');
+
+  const C = 289.3;
+
+  // Pie 1: Décroché / Sans réponse
+  const p1dec  = document.getElementById('p1dec');
+  const p1miss = document.getElementById('p1miss');
+  if (a > 0) {
+    const decLen  = C * d / a;
+    const missLen = C * n / a;
+    if (p1dec)  { p1dec.setAttribute('stroke-dasharray',  decLen.toFixed(1)+' '+(C-decLen).toFixed(1));  p1dec.setAttribute('stroke-dashoffset','72.3'); }
+    if (p1miss) { p1miss.setAttribute('stroke-dasharray', missLen.toFixed(1)+' '+(C-missLen).toFixed(1)); p1miss.setAttribute('stroke-dashoffset', (72.3 - decLen).toFixed(1)); }
+    set('pie1pct', (pD||0)+'%');
+  } else {
+    if (p1dec)  { p1dec.setAttribute('stroke-dasharray','0 289.3');  p1dec.setAttribute('stroke-dashoffset','72.3'); }
+    if (p1miss) { p1miss.setAttribute('stroke-dasharray','0 289.3'); p1miss.setAttribute('stroke-dashoffset','72.3'); }
+    set('pie1pct','—');
+  }
+
+  // Pie 2: R1TMK / Refus / Report / Barrage sur décrochés
+  const p2r1tmk = document.getElementById('p2r1tmk');
+  const p2ref   = document.getElementById('p2ref');
+  const p2rep   = document.getElementById('p2rep');
+  const p2bar   = document.getElementById('p2bar');
+  if (d > 0) {
+    const r1Len  = C * r  / d;
+    const refLen = C * x  / d;
+    const repLen = C * rp / d;
+    const barLen = C * b  / d;
+    if (p2r1tmk) { p2r1tmk.setAttribute('stroke-dasharray', r1Len.toFixed(1)+' '+(C-r1Len).toFixed(1));   p2r1tmk.setAttribute('stroke-dashoffset','72.3'); }
+    if (p2ref)   { p2ref.setAttribute('stroke-dasharray',   refLen.toFixed(1)+' '+(C-refLen).toFixed(1));  p2ref.setAttribute('stroke-dashoffset',   (72.3 - r1Len).toFixed(1)); }
+    if (p2rep)   { p2rep.setAttribute('stroke-dasharray',   repLen.toFixed(1)+' '+(C-repLen).toFixed(1));  p2rep.setAttribute('stroke-dashoffset',   (72.3 - r1Len - refLen).toFixed(1)); }
+    if (p2bar)   { p2bar.setAttribute('stroke-dasharray',   barLen.toFixed(1)+' '+(C-barLen).toFixed(1));  p2bar.setAttribute('stroke-dashoffset',   (72.3 - r1Len - refLen - repLen).toFixed(1)); }
+    set('pie2pct', (pR||0)+'%');
+  } else {
+    [p2r1tmk, p2ref, p2rep, p2bar].forEach(el => { if(el) { el.setAttribute('stroke-dasharray','0 289.3'); el.setAttribute('stroke-dashoffset','72.3'); } });
+    set('pie2pct','—');
+  }
 }
 
 function copierFiche() {
